@@ -24,8 +24,34 @@ void insert(MaxHeap *heap, int val){
     int parentidx = (currentidx - 1) /2 ;
     if(heap->data[currentidx] > heap->data[parentidx]){
       swap(&heap->data[currentidx], &heap->data[parentidx]);
+    } else {
+      return;
     }
   }
+
+int extractMax(MaxHeap *heap){
+  int maxVal = heap->data[0];
+  heap->data[0] = heap->data[maxSize-1];
+  heap->size--;
+
+  int curridx = 0;
+  while(2*curridx+1 < heap->size){
+    int leftidx = 2*curridx+1;
+    int rightidx = 2*curridx+2;
+    int largestidx = leftidx;
+    if(rightidx < heap->size && heap->data[rightidx] > heap->data[eftidx]){
+      largestidx = rightidx;
+    }
+    if(heap->data[curridx] >= heap->data[largestidx]){
+      break;
+    }
+
+    swap(&heap->data[curridx], &heap->data[largestidx]);
+    curridx = largestidx;
+  }
+  return maxVal  
+}
+
 
 
 
